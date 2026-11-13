@@ -1,0 +1,40 @@
+# WS Flooring
+
+> Small, fully insured crew based in Hanahan, South Carolina, that does only tile, marble and bathrooms. WS Flooring LLC remodels bathrooms, installs custom tile and kitchen backsplashes, and lays marble floors for homeowners across the greater Charleston area, with five years of hands-on experience. Clear, detailed quotes within 24 hours.
+
+Key facts:
+
+- Website: https://wsflooring.escolats.com.br (test environment; final domain wsflooringtile.com)
+- Phone: +1 (843) 952-9511
+- Email: wsflooringtile@gmail.com
+- Based in: Hanahan, SC 29410
+- Service area: North Charleston, Mount Pleasant, Hanahan, Goose Creek, Folly Beach, Isle of Palms, Ladson, Summerville, Johns Island, James Island, Moncks Corner, Walterboro, Ravenel and Kiawah Island
+- Instagram: [@flooringws](https://www.instagram.com/flooringws)
+- Preferred contact: the quote form, phone or email
+- Experience: five years of hands-on experience
+- Insurance: fully insured
+- Quotes: clear and detailed, sent within 24 hours
+- Not offered: LVP and hardwood floors
+
+## Main page
+
+- [Home](https://wsflooring.escolats.com.br/): services, project photos, how it works, common questions and the quote form
+
+## Services
+
+- [Bathroom Remodeling](https://wsflooring.escolats.com.br/#services): complete bathroom upgrades designed around daily comfort and routine
+- [Custom Tile & Backsplash](https://wsflooring.escolats.com.br/#services): kitchen walls and floor layouts in tile
+- [Marble Flooring](https://wsflooring.escolats.com.br/#services): smooth, durable marble installations for living areas
+
+## How it works
+
+- [Process](https://wsflooring.escolats.com.br/#how): 1. tell us about your project through the form, 2. get transparent pricing within 24 hours, 3. enjoy the new look while the crew handles everything
+- [Quote form](https://wsflooring.escolats.com.br/#quote): service, city or ZIP code, project details, name, phone and email
+
+## Optional
+
+- [Portfolio](https://wsflooring.escolats.com.br/#portfolio): real bathroom, shower and backsplash projects
+- [Common questions](https://wsflooring.escolats.com.br/#faq): service area, quote timing, insurance, type of work
+- [Privacy Policy](https://wsflooring.escolats.com.br/privacy-policy)
+- [Terms of Service](https://wsflooring.escolats.com.br/terms-of-service)
+- [Sitemap](https://wsflooring.escolats.com.br/sitemap.xml)

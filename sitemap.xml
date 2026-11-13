@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://wsflooring.escolats.com.br/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://wsflooring.escolats.com.br/assets/img/bathroom-remodel-blue-stone-shower-1200.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://wsflooring.escolats.com.br/assets/img/walk-in-shower-marble-look-tile-1200.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://wsflooring.escolats.com.br/assets/img/tile-shower-niche-bench-mosaic-floor-1200.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://wsflooring.escolats.com.br/assets/img/kitchen-herringbone-marble-backsplash-1137.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://wsflooring.escolats.com.br/privacy-policy</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://wsflooring.escolats.com.br/terms-of-service</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+</urlset>

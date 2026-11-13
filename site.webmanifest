@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "WS Flooring",
+  "short_name": "WS Flooring",
+  "description": "High-end tile and marble installation and bathroom remodeling across the greater Charleston area, South Carolina. Fully insured. Quotes within 24 hours.",
+  "lang": "en-US",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#F3F1EC",
+  "background_color": "#F3F1EC",
+  "categories": ["business", "lifestyle"],
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/maskable-icon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "shortcuts": [
+    { "name": "Get a Quote", "short_name": "Quote", "url": "/#quote", "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }] },
+    { "name": "Our Work", "short_name": "Portfolio", "url": "/#portfolio", "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }] }
+  ]
+}

@@ -1,0 +1,28 @@
+# WS Flooring
+# https://wsflooring.escolats.com.br (test environment)
+# While on the test host, every response also carries
+# "X-Robots-Tag: noindex, nofollow" (see .htaccess), so nothing here is indexed.
+# At launch: replace the test host with https://wsflooringtile.com in this file.
+
+User-agent: *
+Allow: /
+Disallow: /404
+Disallow: /clean-cache
+
+# AI crawlers: allowed to read the public site (see /llms.txt)
+User-agent: GPTBot
+Allow: /
+Disallow: /clean-cache
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /clean-cache
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /clean-cache
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://wsflooring.escolats.com.br/sitemap.xml

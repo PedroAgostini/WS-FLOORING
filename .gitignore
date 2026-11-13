@@ -1,0 +1,27 @@
+# Local tools, design explorations and internal project documents
+.mcp.json
+.impeccable/
+_source/
+PRODUCT.md
+WS_FLOORING_LLC_Brief_Projeto.md
+ONE PAGE - WS FLOORING LLC.md
+
+# Credentials and machine-specific settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.vscode/
+.idea/
+
+# Temporary files and generated output
+node_modules/
+__pycache__/
+output/
+tmp/
+*.log
+*.bak
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,173 @@
+# ==============================================================
+# WS Flooring | Apache configuration
+# Test environment: https://wsflooring.escolats.com.br
+# Final domain:     https://wsflooringtile.com (replaces the old WordPress site)
+# Pages (no .html in the URL): /  /privacy-policy  /terms-of-service  /404  /clean-cache
+# ==============================================================
+
+Options -Indexes -MultiViews
+DirectoryIndex index.html
+AddDefaultCharset UTF-8
+ServerSignature Off
+FileETag None
+
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType image/avif                .avif
+  AddType image/webp                .webp
+  AddType image/svg+xml             .svg
+  AddType image/x-icon              .ico
+  AddType font/woff2                .woff2
+  AddType text/javascript           .js .mjs
+  AddType text/plain                .txt
+  AddType application/xml           .xml
+  AddCharset UTF-8 .html .css .js .mjs .txt .xml .webmanifest
+</IfModule>
+
+# Custom error page (served at the clean URL /404)
+ErrorDocument 404 /404
+ErrorDocument 403 /404
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # --- 1. Force HTTPS -------------------------------------------
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # --- 2. Drop www ----------------------------------------------
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # --- 3. Short aliases -----------------------------------------
+  RewriteRule ^(quote|get-a-quote|free-quote|estimate|contact|contact-us)/?$ /#quote [R=301,L,NC,NE]
+  RewriteRule ^(services|our-services)/?$ /#services [R=301,L,NC,NE]
+  RewriteRule ^(portfolio|gallery|our-work)/?$ /#portfolio [R=301,L,NC,NE]
+  RewriteRule ^(about|about-us)/?$ /#about [R=301,L,NC,NE]
+  RewriteRule ^(privacy|privacy-notice)/?$ /privacy-policy [R=301,L,NC]
+  RewriteRule ^(terms|terms-of-use|terms-and-conditions)/?$ /terms-of-service [R=301,L,NC]
+  RewriteRule ^(clear-cache|cache)/?$ /clean-cache [R=301,L,NC]
+
+  # --- 4. Old WordPress site (wsflooringtile.com) ----------------
+  # Pending: add one line per old URL once the list of the 27 indexed pages is final, e.g.
+  # RewriteRule ^bathroom-remodeling/?$ /#services [R=301,L,NC,NE]
+  # Uploaded media and feeds from the old site are gone for good.
+  RewriteRule ^(wp-content/uploads|feed|comments/feed)(/|$) - [G,NC,L]
+  # Old category, tag and author archives fall back to the home page
+  RewriteRule ^(category|tag|author)/ / [R=301,L,NC]
+
+  # --- 5. Antispam: bad bots and exploit probes -----------------
+  RewriteCond %{HTTP_USER_AGENT} (ahrefsbot|mj12bot|semrushbot|dotbot|petalbot|bytespider|blexbot|dataforseobot|serpstatbot|megaindex|zoominfobot|seekport|barkrowler|masscan|nikto|sqlmap|zgrab) [NC]
+  RewriteRule ^ - [F,L]
+  RewriteRule ^(wp-admin|wp-login\.php|wp-content|wp-includes|xmlrpc\.php|phpmyadmin|administrator|\.env|\.git|vendor/phpunit) - [F,NC,L]
+  RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+  RewriteCond %{QUERY_STRING} (union.*select|concat\(|base64_encode|GLOBALS=|_REQUEST=) [NC]
+  RewriteRule ^ - [F,L]
+  # The form never posts to this server (it posts to Web3Forms): refuse POST to pages
+  RewriteCond %{REQUEST_METHOD} POST
+  RewriteCond %{REQUEST_URI} !^/clean-cache
+  RewriteRule ^ - [F,L]
+
+  # --- 6. Keep private files private -----------------------------
+  # Dotfiles and folders (.impeccable, .mcp.json, .git...), except .well-known
+  RewriteRule "(^|/)\.(?!well-known/)" - [F,L]
+  # Working documents and data (PRODUCT.md, the brief, the copy file...)
+  RewriteRule \.(md|json|log|bak|old|sql|sh|ps1|py|psd|ai|zip)$ - [F,NC,L]
+  # Working folders and source logos
+  RewriteRule ^(_source|output|tmp|docs)(/|$) - [F,NC,L]
+  RewriteRule ^logo-(principal|white)\.svg$ - [F,NC,L]
+
+  # --- 7. Clean URLs: no .html (or .php) in the address bar ------
+  # /index.html and /index -> /
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index(\.html)?[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+  # /page.html -> /page
+  RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+  # /page.php -> /page
+  RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+  # /page/ -> /page (files only, never real folders)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+)/$ /$1 [R=301,L]
+  # /page -> page.html (internal, URL stays clean)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+)$ $1.html [L]
+  # /page -> page.php (internal, used by /clean-cache)
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^(.+)$ $1.php [L]
+</IfModule>
+
+# --- Security headers --------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+  # Turn on once HTTPS is confirmed on the final domain:
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # The test host stays out of search results.
+  # It never matches the final domain, so production is indexed normally.
+  <If "%{HTTP_HOST} =~ /escolats\.com\.br$/i">
+    Header always set X-Robots-Tag "noindex, nofollow"
+  </If>
+</IfModule>
+
+# --- Compression ---------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/json application/xml
+  AddOutputFilterByType DEFLATE application/manifest+json image/svg+xml image/x-icon
+</IfModule>
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml text/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript application/json application/xml
+  AddOutputFilterByType BROTLI_COMPRESS application/manifest+json image/svg+xml image/x-icon
+</IfModule>
+
+# --- Cache ------------------------------------------------------------
+# HTML always revalidates, so a new deploy shows up at once.
+# CSS and JS are versioned with ?v= in the pages, so they can be cached long.
+# After changing CSS or JS, bump ?v= in index.html, 404.html and the legal pages,
+# and the steps3d.js ?v= inside main.js.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                          "access plus 1 week"
+  ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType text/javascript           "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+  ExpiresByType image/avif                "access plus 6 months"
+  ExpiresByType image/webp                "access plus 6 months"
+  ExpiresByType image/jpeg                "access plus 6 months"
+  ExpiresByType image/png                 "access plus 6 months"
+  ExpiresByType image/svg+xml             "access plus 6 months"
+  ExpiresByType image/x-icon              "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 week"
+  ExpiresByType text/plain                "access plus 1 day"
+  ExpiresByType application/xml           "access plus 1 day"
+  ExpiresByType text/xml                  "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(css|js|mjs)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.woff2$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(avif|webp|jpe?g|png|svg|ico)$">
+    Header set Cache-Control "public, max-age=15552000"
+  </FilesMatch>
+</IfModule>

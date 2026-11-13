@@ -1,0 +1,30 @@
+/* TEAM */
+
+  Client: WS Flooring LLC
+  Site: https://wsflooring.escolats.com.br (test environment)
+  Final domain: https://wsflooringtile.com
+  Location: Hanahan, South Carolina, USA
+  Phone: +1 (843) 952-9511
+  Contact: wsflooringtile@gmail.com
+  Instagram: @flooringws
+
+  Design and development: Eu Sou TS
+  Site: https://eusouts.com.br/
+  Location: Brazil
+
+/* THANKS */
+
+  Project photos: WS Flooring job archive (provisional set, newer photos to come)
+  Marble textures: bookmatched slab images used as surfaces, never shown as completed work
+
+/* SITE */
+
+  Last update: 2026/11/13
+  Language: English
+  Doctype: HTML5
+  Standards: HTML5, CSS3, ES2020
+  Pages: Home, Privacy Policy, Terms of Service, 404
+  Components: Three.js (3D installation process in How It Works)
+  Fonts: Kumbh Sans (self-hosted)
+  Forms: Web3Forms, with a copy to the agency lead webhook
+  Software: Visual Studio Code
