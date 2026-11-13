@@ -127,7 +127,7 @@ O repositório registra a implementação atual. Os seguintes itens ainda precis
 
 - [ ] Conectar Web3Forms e, se aplicável, o webhook de leads.
 - [ ] Configurar os IDs de analytics e publicidade e validar as conversões.
-- [ ] Substituir os marcadores de avaliações pendentes por depoimentos aprovados.
+- [ ] Substituir os três exemplos de reviews, identificados como fictícios no site, por depoimentos reais aprovados, com autor, data e fonte.
 - [ ] Confirmar as fotos definitivas e aprovar o conteúdo do FAQ.
 - [ ] Criar as páginas de privacidade, termos de serviço e erro 404, já referenciadas pelo projeto.
 - [ ] Adicionar `assets/img/og-ws-flooring.jpg`, referenciada nos metadados sociais.
